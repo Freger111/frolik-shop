@@ -76,6 +76,7 @@ def catalog(products: list[dict]) -> dict:
         mark = "" if left > 0 else " · нет в наличии"
         rows.append([{"text": f"{p['title']} — {money(p['price'])}{mark}",
                       "callback_data": f"p:{p['id']}"}])
+    rows.append([{"text": "🖼 Галерея с фото", "callback_data": "gal"}])
     rows.append([
         {"text": "← Разделы", "callback_data": "catalog"},
         {"text": "◀ Меню", "callback_data": "menu"},
@@ -123,9 +124,10 @@ def admin_panel() -> dict:
         [{"text": "➕ Добавить товар", "callback_data": "adm:add"}],
         [{"text": "📥 Пополнить склад", "callback_data": "adm:topup"}],
         [
+            {"text": "🖼 Фото товаров", "callback_data": "adm:photos"},
             {"text": "🧾 Заказы", "callback_data": "adm:orders"},
-            {"text": "📊 Статистика", "callback_data": "adm:stats"},
         ],
+        [{"text": "📊 Статистика", "callback_data": "adm:stats"}],
         [{"text": "← Меню", "callback_data": "menu"}],
     ]}
 
