@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS products (
     price       INTEGER NOT NULL,
     currency    TEXT NOT NULL DEFAULT 'RUB',
     cover       TEXT NOT NULL DEFAULT '',
+    photo       TEXT NOT NULL DEFAULT '',
     category    TEXT NOT NULL DEFAULT 'Разное',
     active      INTEGER NOT NULL DEFAULT 1,
     created_at  INTEGER NOT NULL
@@ -96,6 +97,8 @@ class Storage:
         if "category" not in cols:
             self.db.execute(
                 "ALTER TABLE products ADD COLUMN category TEXT NOT NULL DEFAULT 'Разное'")
+        if "photo" not in cols:
+            self.db.execute("ALTER TABLE products ADD COLUMN photo TEXT NOT NULL DEFAULT ''")
 
         # старая схема хранила цены заказа в stars — переводим на рубли
         order_cols = {r["name"] for r in self.db.execute("PRAGMA table_info(orders)")}
@@ -155,6 +158,12 @@ class Storage:
     def set_cover(self, product_id: int, cover: str) -> None:
         with self.lock:
             self.db.execute("UPDATE products SET cover = ? WHERE id = ?", (cover, product_id))
+            self.db.commit()
+
+    def set_photo(self, product_id: int, photo: str) -> None:
+        """Фото товара: Telegram file_id или путь вида file:assets/photos/1.jpg."""
+        with self.lock:
+            self.db.execute("UPDATE products SET photo = ? WHERE id = ?", (photo, product_id))
             self.db.commit()
 
     def products(self, active_only: bool = True, category: str | None = None) -> list[dict]:
