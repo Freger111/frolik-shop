@@ -86,6 +86,7 @@ class ShopBot:
         self.admins = admins or set()
         self.wizards: dict[int, dict] = {}
         self.awaiting_promo: set[int] = set()
+        self.awaiting_photo: dict[int, int] = {}
         self.username = ""
         self.offset = 0
 
@@ -121,6 +122,19 @@ class ShopBot:
             self.say(chat_id, caption, markup)
 
     def send_product_card(self, chat_id: int, product: dict, caption: str, markup: dict) -> None:
+        photo = (product.get("photo") or "").strip()
+        if photo:
+            try:
+                if photo.startswith("file:"):
+                    path = config.ROOT / photo[5:]
+                    if path.exists():
+                        self.say_photo(chat_id, path.read_bytes(), caption, markup)
+                        return
+                else:
+                    self.say_photo(chat_id, photo, caption, markup)
+                    return
+            except Exception:
+                pass
         cover = product.get("cover") or ""
         if cover and "/" not in cover and len(cover) > 20:
             try:
@@ -136,6 +150,26 @@ class ShopBot:
                 self.db.set_cover(product["id"], photo[-1]["file_id"])
         except Exception:
             self.say(chat_id, caption, markup)
+
+    def show_gallery(self, chat_id: int, category: str | None = None) -> None:
+        """Показывает товары картинками: фото, обложка или просто подпись."""
+        products = self.db.products(category=category)[:10]
+        if not products:
+            self.say(chat_id, "В этом разделе пока пусто.", kb.back("catalog", "← Разделы"))
+            return
+        self.say(chat_id, "🖼 <b>Галерея</b>\n\nЛистайте и выбирайте 👇")
+        for p in products:
+            caption = f"<b>{p['title']}</b>\n💰 {kb.money(p['price'])}"
+            try:
+                self.send_product_card(
+                    chat_id, p, caption,
+                    {"inline_keyboard": [[
+                        {"text": f"💳 Купить за {kb.money(p['price'])}",
+                         "callback_data": f"buy:{p['id']}"},
+                        {"text": "Подробнее", "callback_data": f"p:{p['id']}"},
+                    ]]})
+            except Exception:
+                continue
 
     def send_document(self, chat_id: int, rel_path: str, caption: str) -> bool:
         """Отдаёт файл из папки проекта (цифровой товар)."""
@@ -227,6 +261,14 @@ class ShopBot:
 
         args = text.split(maxsplit=1)
         payload = args[1].strip() if len(args) > 1 else ""
+
+        if "photo" in msg and user_id in self.awaiting_photo:
+            product_id = self.awaiting_photo.pop(user_id)
+            file_id = msg["photo"][-1]["file_id"]
+            self.db.set_photo(product_id, file_id)
+            product = self.db.get_product(product_id)
+            self.say(chat_id, f"✅ Фото сохранено для товара <b>{product.get('title', product_id)}</b>.")
+            return
 
         if user_id in self.wizards and text and not text.startswith("/"):
             self.wizard_step(chat_id, user_id, text)
@@ -356,6 +398,8 @@ class ShopBot:
             self.show_catalog(chat_id, data[4:])
         elif data == "cat_all":
             self.show_catalog(chat_id, None)
+        elif data == "gal":
+            self.show_gallery(chat_id, None)
         elif data == "help":
             self.say(chat_id, self._help_text(), kb.back())
         elif data == "my":
@@ -623,6 +667,20 @@ class ShopBot:
                 self.say(chat_id, "Сначала добавьте товар.", kb.admin_panel())
                 return
             self.say(chat_id, "Выберите товар:", kb.products_picker(products, "adm:stock"))
+        elif action == "photos":
+            products = self.db.products(active_only=False)
+            if not products:
+                self.say(chat_id, "Сначала добавьте товар.", kb.admin_panel())
+                return
+            self.say(chat_id, "Выберите товар, чтобы задать ему фото:",
+                     kb.products_picker(products, "adm:setphoto"))
+        elif action.startswith("setphoto:"):
+            product_id = int(action.split(":")[1])
+            product = self.db.get_product(product_id)
+            self.awaiting_photo[user_id] = product_id
+            self.say(chat_id,
+                     f"Пришлите фото для товара <b>{product.get('title', product_id)}</b> — "
+                     f"обычным фото (не файлом). Оно будет в карточке и в галерее.")
         elif action == "orders":
             self.show_orders(chat_id)
         elif action == "stats":
@@ -909,6 +967,15 @@ def selftest() -> int:
     sources = {r["src"]: r for r in db.stats_by_source()}
     check("метка источника tiktok учтена", "tiktok" in sources)
 
+    print("14. Карточка с фото и галерея")
+    db.set_photo(pid, "file:assets/preview_pack.jpg")
+    before_photo = t.count("sendPhoto")
+    cb(42, f"p:{pid}")
+    check("карточка ушла с фото", t.count("sendPhoto") > before_photo)
+    before_gallery = t.count("sendPhoto")
+    cb(42, "gal")
+    check("галерея присылает картинки", t.count("sendPhoto") - before_gallery >= 2)
+
     print("\nИтог:", "всё работает" if ok else "есть ошибки")
     return 0 if ok else 1
 
@@ -920,15 +987,6 @@ if __name__ == "__main__":
     if not config.BOT_TOKEN:
         print("Нет BOT_TOKEN. Заполните .env или запустите: python bot.py --selftest")
         raise SystemExit(1)
-    storage = Storage(config.DB_PATH)
-    try:
-        from seed_products import seed_if_empty
-
-        added = seed_if_empty(storage)
-        if added:
-            print(f"Каталог заполнен: {added} товаров")
-    except Exception as exc:
-        print("Не удалось заполнить каталог:", exc)
-    bot = ShopBot(Telegram(config.BOT_TOKEN), storage, config.ADMIN_IDS)
+    bot = ShopBot(Telegram(config.BOT_TOKEN), Storage(config.DB_PATH), config.ADMIN_IDS)
     print("Магазин запущен. Ctrl+C — остановить.")
     bot.poll_forever()
