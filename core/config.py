@@ -26,6 +26,8 @@ def load_env() -> None:
 
 load_env()
 
+VERSION = "1.5-photos"   # меняется при каждом обновлении кода — видно в /version
+
 BOT_TOKEN = os.environ.get("BOT_TOKEN", "")
 ADMIN_IDS = {
     int(x) for x in os.environ.get("ADMIN_IDS", "").replace(";", ",").split(",")
