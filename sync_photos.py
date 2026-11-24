@@ -17,7 +17,12 @@ from core.storage import Storage  # noqa: E402
 MANIFEST = config.ROOT / "assets" / "photos" / "manifest.json"
 
 
-def sync_photos(db: Storage) -> int:
+def sync_photos(db: Storage, force: bool = True) -> int:
+    """Проставляет фото товарам по названию из манифеста.
+
+    force=True перезаписывает даже уже заданные фото — так обновления
+    доходят до базы на хостинге, где товары могли быть созданы раньше.
+    """
     if not MANIFEST.exists():
         return 0
     try:
@@ -26,12 +31,14 @@ def sync_photos(db: Storage) -> int:
         return 0
     applied = 0
     for product in db.products(active_only=False):
-        if product.get("photo"):
+        if product.get("photo") and not force:
             continue
         path = mapping.get(product["title"])
         if not path:
             continue
         if not (config.ROOT / path).exists():
+            continue
+        if (product.get("photo") or "") == f"file:{path}":
             continue
         db.set_photo(product["id"], f"file:{path}")
         applied += 1
