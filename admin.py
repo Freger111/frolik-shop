@@ -47,6 +47,10 @@ def main() -> int:
     cat.add_argument("product_id", type=int)
     cat.add_argument("category")
 
+    photo = sub.add_parser("photo", help="задать фото товара файлом")
+    photo.add_argument("product_id", type=int)
+    photo.add_argument("path", help="путь к картинке, например assets/preview_pack.jpg")
+
     stock = sub.add_parser("stock", help="пополнить склад")
     stock.add_argument("product_id", type=int)
     stock.add_argument("items")
@@ -110,6 +114,14 @@ def main() -> int:
                           (args.category, args.product_id))
             db.db.commit()
         print(f"Товар #{args.product_id} → раздел «{args.category}»")
+
+    elif args.cmd == "photo":
+        path = Path(args.path)
+        if not path.exists():
+            print("файл не найден:", path)
+            return 1
+        db.set_photo(args.product_id, f"file:{path.as_posix()}")
+        print(f"Фото товара #{args.product_id}: {path.name}")
 
     elif args.cmd == "list":
         products = db.products(active_only=False)
