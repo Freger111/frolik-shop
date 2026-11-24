@@ -5,6 +5,7 @@
   "price": 199,
   "category": "Гайды",
   "active": true,
+  "photo": "assets/photos/guides.jpg",
   "items": [
    "file:assets/guides.zip"
   ]
@@ -15,6 +16,7 @@
   "price": 199,
   "category": "Звуки",
   "active": true,
+  "photo": "assets/photos/sounds.jpg",
   "items": [
    "file:assets/sounds.zip"
   ]
@@ -25,6 +27,7 @@
   "price": 149,
   "category": "Инструменты",
   "active": true,
+  "photo": "assets/photos/aim.jpg",
   "items": [
    "file:assets/aim_pack.zip"
   ]
@@ -35,6 +38,7 @@
   "price": 499,
   "category": "Наборы",
   "active": true,
+  "photo": "assets/photos/bundle_all.jpg",
   "items": [
    "file:assets/all_packs.zip"
   ]
@@ -45,6 +49,7 @@
   "price": 549,
   "category": "Наборы",
   "active": true,
+  "photo": "assets/photos/bundle_start.jpg",
   "items": [
    "file:assets/start_bundle.zip"
   ]
@@ -55,6 +60,7 @@
   "price": 899,
   "category": "Наборы",
   "active": true,
+  "photo": "assets/photos/bundle_full.jpg",
   "items": [
    "file:assets/full_bundle.zip"
   ]
@@ -65,6 +71,7 @@
   "price": 199,
   "category": "Обложки",
   "active": true,
+  "photo": "assets/photos/covers_fon.jpg",
   "items": [
    "file:assets/covers_pack.zip"
   ]
@@ -75,6 +82,7 @@
   "price": 149,
   "category": "Обложки",
   "active": true,
+  "photo": "assets/photos/covers_yt.jpg",
   "items": [
    "file:assets/covers_yt.zip"
   ]
@@ -85,6 +93,7 @@
   "price": 99,
   "category": "Обложки",
   "active": true,
+  "photo": "assets/photos/avatars.jpg",
   "items": [
    "file:assets/avatars.zip"
   ]
@@ -95,6 +104,7 @@
   "price": 100,
   "category": "Оформление",
   "active": true,
+  "photo": "assets/photos/obs_pack.jpg",
   "items": [
    "file:assets/obs_pack.zip"
   ]
@@ -105,6 +115,7 @@
   "price": 249,
   "category": "Оформление",
   "active": true,
+  "photo": "assets/photos/twitch_pack.jpg",
   "items": [
    "file:assets/twitch_pack.zip"
   ]
@@ -115,6 +126,7 @@
   "price": 199,
   "category": "Оформление",
   "active": true,
+  "photo": "assets/photos/alerts_neon.jpg",
   "items": [
    "file:assets/alerts_neon.zip"
   ]
@@ -125,6 +137,7 @@
   "price": 149,
   "category": "Оформление",
   "active": true,
+  "photo": "assets/photos/alerts_min.jpg",
   "items": [
    "file:assets/alerts_min.zip"
   ]
@@ -135,6 +148,7 @@
   "price": 99,
   "category": "Оформление",
   "active": true,
+  "photo": "assets/photos/screens.jpg",
   "items": [
    "file:assets/screens_cyber.zip"
   ]
@@ -145,6 +159,7 @@
   "price": 149,
   "category": "Оформление",
   "active": true,
+  "photo": "assets/photos/panels.jpg",
   "items": [
    "file:assets/panels_dark.zip"
   ]

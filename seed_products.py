@@ -30,6 +30,9 @@ def seed_if_empty(db: Storage) -> int:
         items = item.get("items") or []
         if items:
             db.add_stock(pid, items)
+        photo = item.get("photo") or ""
+        if photo and (config.ROOT / photo).exists():
+            db.set_photo(pid, f"file:{photo}")
         if not item.get("active", True):
             db.set_active(pid, False)
         added += 1
