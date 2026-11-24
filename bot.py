@@ -920,6 +920,15 @@ if __name__ == "__main__":
     if not config.BOT_TOKEN:
         print("Нет BOT_TOKEN. Заполните .env или запустите: python bot.py --selftest")
         raise SystemExit(1)
-    bot = ShopBot(Telegram(config.BOT_TOKEN), Storage(config.DB_PATH), config.ADMIN_IDS)
+    storage = Storage(config.DB_PATH)
+    try:
+        from seed_products import seed_if_empty
+
+        added = seed_if_empty(storage)
+        if added:
+            print(f"Каталог заполнен: {added} товаров")
+    except Exception as exc:
+        print("Не удалось заполнить каталог:", exc)
+    bot = ShopBot(Telegram(config.BOT_TOKEN), storage, config.ADMIN_IDS)
     print("Магазин запущен. Ctrl+C — остановить.")
     bot.poll_forever()
