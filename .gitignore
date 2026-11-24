@@ -1,0 +1,19 @@
+# .env и данные
+.env
+data/
+*.db
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Сгенерированные товары и медиа (пересобираются make_assets.py)
+assets/*.zip
+assets/catalog/
+assets/packs/
+assets/obs_pack/
+marketing/carousel/*.mp4
+marketing/carousel/reel*.mp4

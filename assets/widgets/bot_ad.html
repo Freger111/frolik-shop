@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8">
+<style>
+  html,body{margin:0;height:100%;background:transparent;overflow:hidden;
+            font-family:Segoe UI,Arial,sans-serif}
+  .ad{position:absolute;left:0;top:0;display:flex;align-items:center;gap:18px;
+      padding:16px 26px 16px 16px;border-radius:28px;background:rgba(14,16,28,.94);
+      border:3px solid #7c5cff;box-shadow:0 12px 40px rgba(124,92,255,.35);
+      overflow:hidden;white-space:nowrap}
+  .ad::after{content:"";position:absolute;top:-40px;left:-140px;width:90px;height:260px;
+      background:linear-gradient(90deg,transparent,rgba(255,255,255,.16),transparent);
+      transform:rotate(14deg);animation:shine 3.4s linear infinite}
+  @keyframes shine{0%{left:-160px}100%{left:120%}}
+  .logo{width:76px;height:76px;border-radius:50%;border:3px solid #7c5cff;
+        display:flex;align-items:center;justify-content:center;font-weight:800;
+        font-size:38px;color:#fff;background:#18122e;flex:none}
+  .txt{display:flex;flex-direction:column;gap:2px}
+  .name{font-size:30px;font-weight:800;color:#fff;letter-spacing:.5px}
+  .sub{font-size:15px;color:#a5acd2}
+  .link{font-size:21px;font-weight:800;color:#3ad7ff;margin-top:2px}
+  .dot{width:12px;height:12px;border-radius:50%;background:#ff5064;
+       animation:pulse 1.4s ease-in-out infinite;flex:none}
+  @keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:.6}}
+</style></head>
+<body>
+  <div class="ad">
+    <div class="logo">F</div>
+    <div class="txt">
+      <div class="name">FROLIK SHOP</div>
+      <div class="sub">оверлеи · панели · алерты для стрима</div>
+      <div class="link">t.me/frolikfortnitebot</div>
+    </div>
+    <div class="dot"></div>
+  </div>
+</body></html>

@@ -1,0 +1,8 @@
+Бесплатный мини-пак Frolik Shop
+
+1. OBS → Источники → + → Изображение → overlays/frame_full.png
+2. Растянуть на весь экран.
+3. Плашка с ником: overlays/lower_third.png
+4. Звук: sounds/alert.wav — в настройках алертов.
+
+Полные паки (Twitch, обложки, аим-тренажёр) — в боте: /catalog
