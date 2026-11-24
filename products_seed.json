@@ -1,0 +1,152 @@
+[
+ {
+  "title": "Гайды: OBS с нуля + ПК без тормозов",
+  "description": "Два понятных гайда: настройка OBS за 20 минут и 10 шагов для ускорения ПК. Открываются в браузере.",
+  "price": 199,
+  "category": "Гайды",
+  "active": true,
+  "items": [
+   "file:assets/guides.zip"
+  ]
+ },
+ {
+  "title": "Пак звуков для стрима (20)",
+  "description": "20 звуков WAV: уведомления, клики, монеты, алерты, донат, рейд, старт стрима.",
+  "price": 199,
+  "category": "Звуки",
+  "active": true,
+  "items": [
+   "file:assets/sounds.zip"
+  ]
+ },
+ {
+  "title": "Аим-тренажёр + план на 14 дней",
+  "description": "Браузерная игра для тренировки реакции и трекинга (работает офлайн) плюс пошаговая программа тренировок и гайд.",
+  "price": 149,
+  "category": "Инструменты",
+  "active": true,
+  "items": [
+   "file:assets/aim_pack.zip"
+  ]
+ },
+ {
+  "title": "Все паки сразу (набор)",
+  "description": "Четыре пака в одном архиве: OBS, Twitch-оформление, фоны для обложек и аим-тренажёр. Выгоднее по отдельности.",
+  "price": 499,
+  "category": "Наборы",
+  "active": true,
+  "items": [
+   "file:assets/all_packs.zip"
+  ]
+ },
+ {
+  "title": "Старт стримера: оформление + звуки + гайды",
+  "description": "Всё для первого стрима: OBS-пак, 20 звуков и два гайда. Дешевле, чем по отдельности.",
+  "price": 549,
+  "category": "Наборы",
+  "active": true,
+  "items": [
+   "file:assets/start_bundle.zip"
+  ]
+ },
+ {
+  "title": "Полный набор: всё для стрима",
+  "description": "12 паков в одном архиве: оформление, алерты, экраны, панели, обложки, аватарки, звуки, гайды, аим-тренажёр.",
+  "price": 899,
+  "category": "Наборы",
+  "active": true,
+  "items": [
+   "file:assets/full_bundle.zip"
+  ]
+ },
+ {
+  "title": "Фоны для обложек (18 шт)",
+  "description": "12 горизонтальных фонов 1280x720 и 6 вертикальных 1080x1920 для Shorts/Reels. Текста нет — пишите свой в любом редакторе. Есть пример и гайд.",
+  "price": 199,
+  "category": "Обложки",
+  "active": true,
+  "items": [
+   "file:assets/covers_pack.zip"
+  ]
+ },
+ {
+  "title": "Обложки YouTube «Градиент» (10)",
+  "description": "10 фонов 1280x720 без текста. Добавьте заголовок в Canva или Figma — обложка готова.",
+  "price": 149,
+  "category": "Обложки",
+  "active": true,
+  "items": [
+   "file:assets/covers_yt.zip"
+  ]
+ },
+ {
+  "title": "Аватарки и иконки (12)",
+  "description": "12 аватарок 512x512 с прозрачностью для Twitch, YouTube, Telegram и Discord.",
+  "price": 99,
+  "category": "Обложки",
+  "active": true,
+  "items": [
+   "file:assets/avatars.zip"
+  ]
+ },
+ {
+  "title": "OBS-пак «Стрим за 10 минут»",
+  "description": "Оверлеи, экраны пауз, GIF-алерты, звуки и живой таймер для OBS. Внутри guide.html — настройка за 10 минут.",
+  "price": 100,
+  "category": "Оформление",
+  "active": true,
+  "items": [
+   "file:assets/obs_pack.zip"
+  ]
+ },
+ {
+  "title": "Twitch-пак «Оформление канала»",
+  "description": "6 панелей канала, 4 GIF-алерта (подписка, донат, саб, рейд), оффлайн-экран 1920x1080 и 4 звука. Внутри guide.html.",
+  "price": 249,
+  "category": "Оформление",
+  "active": true,
+  "items": [
+   "file:assets/twitch_pack.zip"
+  ]
+ },
+ {
+  "title": "Алерты «Neon» (8 GIF)",
+  "description": "8 неоновых GIF-алертов: подписчик, донат, саб, рейд, фоллоу, хост, топ-донат, первый зритель. Прозрачный фон, готовы для OBS/Streamlabs.",
+  "price": 199,
+  "category": "Оформление",
+  "active": true,
+  "items": [
+   "file:assets/alerts_neon.zip"
+  ]
+ },
+ {
+  "title": "Алерты «Minimal» (6 GIF)",
+  "description": "6 спокойных минималистичных алертов без кислоты. Подойдут для деловых и обучающих стримов.",
+  "price": 149,
+  "category": "Оформление",
+  "active": true,
+  "items": [
+   "file:assets/alerts_min.zip"
+  ]
+ },
+ {
+  "title": "Экраны паузы «Киберпанк» (3)",
+  "description": "Три экрана 1920x1080: «скоро начнём», «отошёл», «стрим завершён». Сетка и неоновые линии.",
+  "price": 99,
+  "category": "Оформление",
+  "active": true,
+  "items": [
+   "file:assets/screens_cyber.zip"
+  ]
+ },
+ {
+  "title": "Панели Twitch «Тёмный минимализм» (8)",
+  "description": "8 панелей 320x100: о стриме, донат, расписание, соцсети, правила, железо, музыка, контакты.",
+  "price": 149,
+  "category": "Оформление",
+  "active": true,
+  "items": [
+   "file:assets/panels_dark.zip"
+  ]
+ }
+]
